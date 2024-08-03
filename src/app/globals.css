@@ -16,18 +16,60 @@
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+
 
 @layer utilities {
+ 
   .text-balance {
     text-wrap: balance;
+  }
+  html{
+    overflow: hidden;
+  
+   }
+    body{
+     height: 100vh !important;
+     width: 100vw !important;
+     overflow-y: auto;
+     overflow-x:hidden !important;
+     scroll-behavior: smooth;
+     
+    }
+
+    .mobile-menu{
+      z-index: 30 !important;
+    }
+  .overflow-x-hidden{
+    overflow-x: hidden !important;
+  }
+  .sticky-nav{
+    height:auto;
+    width:100% !important;
+    overflow: hidden;
+    position:sticky !important;
+    animation:smooth-sticky 0.8s;
+    top:0;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .z-30{
+    z-index: 30 !important;
+  }
+  .z-50{
+    z-index: 50 !important;
+  }
+  @keyframes smooth-sticky {
+    0%{
+      top:-60px;
+    }
+    100%{
+      top:0
+    }
   }
 }
