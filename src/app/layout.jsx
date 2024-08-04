@@ -14,7 +14,7 @@ import localFont from 'next/font/local'
 const myFont = localFont({
   src: [
     {
-      path: './myfonts/general.ttf',
+      path: './myfonts/PotroSansBangla-Regular.ttf',
       weight: '50'
     },
    
