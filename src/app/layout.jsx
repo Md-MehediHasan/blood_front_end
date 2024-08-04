@@ -7,9 +7,20 @@ import MainLayout from "../components/common/MainLayout";
 import {cookies} from 'next/headers'
 import { getAllDistricts } from "../backendRequests/getRequests";
 import { getAuthenticatedUser } from "../backendRequests/getRequests";
+import localFont from 'next/font/local'
 
 
-const inter = Inter({ subsets: ["latin"] }); 
+
+const myFont = localFont({
+  src: [
+    {
+      path: './myfonts/general.ttf',
+      weight: '50'
+    },
+   
+  ],
+  variable: '--font-custom'
+})
 
 export const metadata = {
   title: "EBB",
@@ -32,7 +43,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={myFont.className}>
         <CommonContextProvider token={token} districts={allDistricts} authenticatedUser={authenticatedUser}>  
             <MainLayout>
              {children}

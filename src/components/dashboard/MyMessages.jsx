@@ -62,9 +62,9 @@ export default function MyMessages({allConversations,messages}){
                         <span className="px-2 text-white rounded-full bg-red-700 absolute right-2">{item.unread_number}</span>}</li>
                 ))}
             </ul>
-            <div className={`col-span-4 ${chat_id ==null ?'hidden':'block'} lg:block bg-gray-700 absolute lg:relative` }>
+            <div className={`col-span-6 lg:col-span-4 ${chat_id ==null ?'hidden':'block'} lg:block bg-gray-700 lg:relative` }>
               {chat_id ==null && <h3 className="text-lg my-4">click any conversation to open</h3>}
-              {chat_id && <div className="w-[98%] absolute lg:relative mx-auto my-2 h-[98vh] relative rounded-md border border-gray-500 ">
+              {chat_id && <div className="w-[100%] lg:w-[98%] absolute lg:relative mx-auto my-2 h-[98vh] relative rounded-md border border-gray-500 ">
                         <div className="sticky flex items-center w-full col-span-4 py-8 h-auto bg-gray-800 rounded-t-md">
                             <div className="absolute left-4">
                                 <span className="block text-white">{selectedChatPerson.name}</span>

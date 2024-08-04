@@ -1,5 +1,5 @@
-import localFont from 'next/font/local'
-const myFont = localFont({ src: './my-fonts/SutonnyMJ.TTF' })
+
+const myFont = localFont({ src: './my-fonts/HimelBorno.ttf' })
 export default function MyApp ({Component,pageProps}) {
   return (
     <main className={myFont.className}>
