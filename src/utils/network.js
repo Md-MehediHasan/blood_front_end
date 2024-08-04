@@ -38,13 +38,17 @@ export async function makePostRequest(url, data, isFileUpload) {
             'Content-type': 'application/json',
         }
     }
+    let server_response
     let request = await fetch(url, {
         method: 'POST',
         body: isFileUpload? data:JSON.stringify(data),
         headers: headers
     })
+    if(request.status==200||request.status==201){
+        server_response= await request?.json()
 
-    let server_response = await request?.json()
+    }
+    
     return (
         {
             status: request.status,
