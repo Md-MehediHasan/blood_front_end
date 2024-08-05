@@ -25,7 +25,7 @@ export default async function Home({searchParams}) {
 
 
   return (
-    <SearchContextProvider allUpazila={upazilaByDistrictName}>
+    <SearchContextProvider upazilas={upazilaByDistrictName}>
           <main className='py-12  lg:py-16 min-h-screen h-auto'>
           <section>
           <h2 className="text-center mb-5 text-2xl  lg:text-3xl text-slate-100 font-extrabold">জরুরী রক্ত খুজুন</h2>

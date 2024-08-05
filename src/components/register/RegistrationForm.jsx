@@ -7,11 +7,16 @@ import { makePostRequest } from '../.././utils/network'
 import FormInputs from '../common/FormInput'
 import TermsNConditions from '../common/TermsNConditions'
 import { endPoints } from '../../utils/endPoints'
+import { useSearchContext } from '../../Contexts/SearchListContext'
+import { usePathname, useRouter } from 'next/navigation'
 
 
 export default function RegistrationForm() {
-    const { allDistrict,setSelectedDist,allUpazila} = useCommonContext()
+    const { allDistrict,setSelectedDist} = useCommonContext()
+    const {allUpazila}=useSearchContext()
     const [isTermsAccepted,setIsTermsAccepted]=useState(false)
+    const pathName=usePathname()
+    const {replace}=useRouter()
 
     const [regiStatus, setRegiStatus] = useState({
         isRegistrationSuccess: false,
@@ -29,8 +34,8 @@ export default function RegistrationForm() {
         name: '',
         contact_number: '+88',
         email: '',
-        district: allDistrict[0].district,
-        upazila: '',
+        district: 'Dhaka',
+        upazila: allUpazila?.[0],
         blood_id: blood_choices[0].id,
         last_donate: today,
         password: '',
@@ -138,7 +143,7 @@ export default function RegistrationForm() {
                     name: '',
                     contact_number: '',
                     email: '',
-                    district: '',
+                    district: 'Dhaka',
                     upazila: '',
                     blood_id: '',
                     last_donate: today,
@@ -166,10 +171,15 @@ export default function RegistrationForm() {
 
 
     useEffect(() => {
-
-        setSelectedDist(district.toLowerCase())
-
+        if(district !=''){
+            replace(`${pathName}?selectedDistrict=${district}`)
+        }
+        else{
+            replace(pathName)
+        }
+        
     }, [district])
+
 
 
     return (

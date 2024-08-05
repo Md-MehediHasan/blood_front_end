@@ -16,7 +16,7 @@ export async function GetRequest(url) {
         }
     }
 
-    const request = await fetch(url, {
+const request =  await fetch(url, {
         headers: headers
     }, { caches: 'no-cache' })
     return request

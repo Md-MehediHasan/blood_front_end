@@ -63,16 +63,10 @@ export async function getAllDistricts() {
 
 export async function getAllUpazilas(district){
     let url=`https://bdapis.com/api/v1.2/district/${district}`
-    try{
-        const res= await GetRequest(url)
-            const data = await res.json()
-            return data.data.upazillas
+    const res = await GetRequest(url)
+    const data = await res.json()
+    return data.data.upazillas
        
-    }
-    catch(error){
-        throw new Error(error)
-    }
-   
 }
 
 export async function getConversations(){
