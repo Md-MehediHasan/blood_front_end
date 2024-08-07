@@ -11,6 +11,7 @@ import localFont from 'next/font/local'
 
 
 
+
 const myFont = localFont({
   src: [
     {
@@ -25,7 +26,11 @@ const myFont = localFont({
 export const metadata = {
   title: "EBB",
   description: "জরুরী সময়ে আপনার এলাকায় রক্ত অনুসন্ধানে সহায়তা করুন । আমাদের এপ্লিকেশন আপনাকে সহজেই একটি রক্তদাতা খুঁজে পাওয়ার সুযোগ দেয়, যাতে আপনি এবং আপনার পরিবার জন্য সঠিক সময়ে রক্ত পাওয়ার সিদ্ধান্ত নিতে পারেন।",
-  keywords:'blood,required,emergency,quotarefrombd,badhon blood,A+ blood,A- blood,B+ blood , B- Blood,AB+ blood,AB- blood,O+ blood,O- blood'
+  
+  keywords:'blood,required,emergency,quotarefrombd,badhon blood,A+ blood,A- blood,B+ blood , B- Blood,AB+ blood,AB- blood,O+ blood,O- blood',
+  openGraph: {
+    images: ['https://bloodapi.dainikjugjatra.com/media/Blood_app.png',]
+  }
 };
 
 export default async function RootLayout({ 
@@ -43,6 +48,10 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <meta property="og:image" content="<generated>" />
+      <meta property="og:image:type" content="<generated>" />
+      <meta property="og:image:width" content="<generated>" />
+      <meta property="og:image:height" content="<generated>" />
       <body className={myFont.className}>
         <CommonContextProvider token={token} districts={allDistricts} authenticatedUser={authenticatedUser}>  
             <MainLayout>

@@ -1,3 +1,4 @@
+import Head from 'next/head'
 
 const myFont = localFont({ src: './my-fonts/HimelBorno.ttf' })
 export default function MyApp ({Component,pageProps}) {
