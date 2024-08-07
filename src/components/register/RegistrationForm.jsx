@@ -123,7 +123,7 @@ export default function RegistrationForm() {
 
 
     function isFormValid() {
-        if (password == confirm_password && contact_number?.length >= 11) {
+        if (password == confirm_password && password.length >=8 && contact_number?.length >= 11) {
             return Object.keys(registrationData).every(key => registrationData[key] != '') && isTermsAccepted
         }
         else {
