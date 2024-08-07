@@ -139,11 +139,11 @@ export default function UpdateMyProfile({authenticatedUser}){
 
     return(
         <div className="w-full px-auto ">
-            <form className="mx-auto block w-4/5 lg:w-2/3 my-2  select-none bg-stone-700 text-slate-200 p-5 border border-stone-500 rounded-md " onSubmit={updateData}>
+            <form className="mx-auto block w-4/5 lg:w-2/3 my-2  select-none bg-gray-700 text-gray-200 p-5 border border-stone-500 rounded-md " onSubmit={updateData}>
                 <h1 className="w-full block text-center my-5 text-2xl">Profile Update</h1>
                 <p className='text-green-600 text-center text-xl my-4'>{submissionStatus.server_response }</p>
                  <FormInputs formInputs={formInputs} onChangeHandler={onUserUpdateDataChange}/>
-                <button type='submit' disabled={ !isFormValid() ||submissionStatus.isLoading } className={ `mx-auto block px-2 text-xl py-1 ${isFormValid() ? 'bg-green-700' : 'bg-green-200 text-stone-700'} my-3 rounded-sm` }>{ submissionStatus.isLoading ? 'Updating Records' : 'Update' }</button>
+                <button type='submit' disabled={ !isFormValid() ||submissionStatus.isLoading } className={ `mx-auto block px-2 text-xl py-1 ${isFormValid() ? 'bg-green-700' : 'bg-green-200 text-gray-600'} my-3 rounded-sm` }>{ submissionStatus.isLoading ? 'Updating Records' : 'Update' }</button>
             </form>
         </div>
     )
