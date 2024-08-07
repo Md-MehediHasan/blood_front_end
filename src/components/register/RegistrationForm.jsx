@@ -135,34 +135,39 @@ export default function RegistrationForm() {
         e.preventDefault()
         let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${endPoints.REGISTER_USER}`
         if (isFormValid()) {
-
-            setRegiStatus({ ...regiStatus, isLoading: true })
-            const request = await makePostRequest(url, registrationData)
-            if (request.status == 201) {
-                setRegistrationData({
-                    name: '',
-                    contact_number: '',
-                    email: '',
-                    district: 'Dhaka',
-                    upazila: '',
-                    blood_id: '',
-                    last_donate: today,
-                    password: '',
-                    confirm_password: ''
-                })
-
-
-                setRegiStatus({ isLoading: false, isRegistrationSuccess: true, serverMsg: request.server_response?.msg })
-
-                setTimeout(() => {
-                    return window.location.href = '/login'
-                }, 1200)
-
+            try{
+                setRegiStatus({ ...regiStatus, isLoading: true })
+                const request = await makePostRequest(url, registrationData)
+                if (request.status == 201) {
+                    setRegistrationData({
+                        name: '',
+                        contact_number: '',
+                        email: '',
+                        district: 'Dhaka',
+                        upazila: '',
+                        blood_id: '',
+                        last_donate: today,
+                        password: '',
+                        confirm_password: ''
+                    })
+    
+    
+                    setRegiStatus({ isLoading: false, isRegistrationSuccess: true, serverMsg: request.server_response?.msg })
+    
+                    setTimeout(() => {
+                        return window.location.href = '/login'
+                    }, 1200)
+    
+                }
+                else {
+                    setRegiStatus({ ...regiStatus, isLoading: false, serverMsg: request?.server_response })
+    
+                }
             }
-            else {
-                setRegiStatus({ ...regiStatus, isLoading: false, serverMsg: request?.server_response })
-
+            catch(error){
+                setRegiStatus({ ...regiStatus, isLoading: false, serverMsg: 'Connnection Problem. Check Your Internet Connection.' })
             }
+           
         }
         else {
             setUserMsg('Password and Confirm Password is not same.')

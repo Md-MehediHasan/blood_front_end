@@ -70,6 +70,7 @@ export default function OrganizationRegiForm(){
             formData.append(key, organizationData[key])
         }
         let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${endPoints.REGISTER_ORG}`
+        try{
         setSubmissionStatus({
             ...submissionStatus, isLoading: true
         })
@@ -87,6 +88,13 @@ export default function OrganizationRegiForm(){
                 userMsg: request.server_response
             })
         }
+    }
+    catch(error){
+        setSubmissionStatus({
+            isLoading: false,
+            userMsg: 'Connection Problem. Check Your Internet Connection.'
+        })
+    }
     }
    
     return(

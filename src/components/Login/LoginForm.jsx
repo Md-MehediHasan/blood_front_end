@@ -85,7 +85,7 @@ export default function LoginForm() {
                 }
             }
             catch(error){
-             setSubmissionStatus({ ...submissionStatus, isLoading: false,server_response:error.message })  
+             setSubmissionStatus({ ...submissionStatus, isLoading: false,server_response:'Connection Problem. Check Your Internet Connection.' })  
             }
           
         }
