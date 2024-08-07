@@ -5,14 +5,19 @@ import { useCommonContext } from "../../Contexts/CommonContexts"
 import FormInputs from "../common/FormInput"
 import { makePostRequest } from "../../utils/network"
 import { endPoints } from "../../utils/endPoints"
+import { usePathname, useRouter } from "next/navigation"
+import { useSearchContext } from "../../Contexts/SearchListContext"
 
 export default function UpdateMyProfile({authenticatedUser}){
 
-    const {allDistrict, setSelectedDist, allUpazila } = useCommonContext()
+    const {allDistrict, setSelectedDist} = useCommonContext()
+    const {allUpazila}=useSearchContext()
     const [submissionStatus, setSubmissionStatus] = useState({
         isLoading: false,
         server_response:''
     })
+    const pathName=usePathname()
+    const {replace}=useRouter()
 
     const [userUpdateData, setUserUpdateData] = useState({
         contact: authenticatedUser.contact,
@@ -121,10 +126,15 @@ export default function UpdateMyProfile({authenticatedUser}){
 
     }
 
- useEffect(()=>{
-    setSelectedDist(district.toLowerCase())
- },[district])
-
+    useEffect(() => {
+        if(district !=''){
+            replace(`${pathName}?selectedDistrict=${district}`)
+        }
+        else{
+            replace(pathName)
+        }
+        
+    }, [district])
 
 
     return(

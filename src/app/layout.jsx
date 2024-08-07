@@ -15,7 +15,7 @@ const myFont = localFont({
   src: [
     {
       path: './myfonts/PotroSansBangla-Regular.ttf',
-      weight: '50'
+      weight: '200'
     },
    
   ],

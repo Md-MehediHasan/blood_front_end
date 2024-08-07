@@ -11,6 +11,7 @@ import { useSearchParams } from "next/navigation"
 
 
 export default function LoginForm() {
+    const {submissionError}=useCommonContext()
     const params=useSearchParams()
     const [submissionStatus, setSubmissionStatus] = useState({
         isLoading: false,
@@ -65,24 +66,28 @@ export default function LoginForm() {
                 contact: `${contact_number.slice(0, 3) == '+88' ? contact_number : '+88' + String(contact_number)}`,
                 password: password
             }
-            setSubmissionStatus({ ...submissionStatus, isLoading: true })
-            const request = await makePostRequest(url, body)
-            if (request.status == 201 || request.status==200) {
-                setLoginData({
-                    contact_number: '',
-                    password: ''
-                })
-                setCredentials(request.server_response?.token)
-                setSubmissionStatus({ isLoading: false, isLoginSuccess: true,server_response:request.server_response?.msg })
-                setTimeout(() => {
-                    return window.location.href = '/'
-                }, 3000)
+            try{
+                setSubmissionStatus({ ...submissionStatus, isLoading: true })
+                const request = await makePostRequest(url, body)
+                if (request.status == 201 || request.status==200) {
+                    setLoginData({
+                        contact_number: '',
+                        password: ''
+                    })
+                    setCredentials(request.server_response?.token)
+                    setSubmissionStatus({ isLoading: false, isLoginSuccess: true,server_response:request.server_response?.msg })
+                    setTimeout(() => {
+                        return window.location.href = '/'
+                    }, 1200)
+                }
+                else{
+                    setSubmissionStatus({ isLoading: false, isLoginSuccess: false,server_response:request.server_response })
+                }
             }
-            else if (request.status != 200 || request.status !=201) {
-                setSubmissionStatus({ ...submissionStatus, isLoading: false,server_response:request.server_response })
+            catch(error){
+             setSubmissionStatus({ ...submissionStatus, isLoading: false,server_response:error.message })  
             }
-           
-
+          
         }
     }
 
@@ -95,7 +100,7 @@ export default function LoginForm() {
                 <p className='text-green-600 text-center text-xl my-4'>{submissionStatus.server_response}</p>
                 
                 { submissionStatus.isLoginSuccess && <p className='text-green-600 text-center text-xl my-4'>Redirecting...</p> }
-                {reason !=null &&  <p className='text-red-600 text-center text-xl my-4'>{reason}</p>}
+                {(reason !=null && !submissionStatus.isLoginSuccess) &&  <p className='text-red-600 text-center text-xl my-4'>{reason}</p>}
                 <div className="w-[90%] lg:w-4/5 mx-auto">
                     <FormInputs formInputs={ inputItems } onChangeHandler={ onLoginDataChange } />
                 </div>

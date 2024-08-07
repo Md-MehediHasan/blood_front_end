@@ -3,14 +3,15 @@ import {GetRequest} from '../utils/network'
 import { endPoints } from '../utils/endPoints'
 
 export  async function getDonarList(blood_id,district,upazila,donar_type) {
-    let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${endPoints.FIND_DONAR}/?blood_id=${blood_id}&donar_type=${donar_type}${district !=undefined?`&district=${district}` : ''}${upazila != undefined?`&upazila=${upazila}` : ''}`
+    let url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/${endPoints.FIND_DONAR}/?blood_id=${blood_id}&donar_type=${donar_type}${district !=''?`&district=${district}` : ''}${upazila != ''?`&upazila=${upazila}` : ''}`
     try{
         let res = await GetRequest(url)
         const data = await res.json()
         return data
+     
     }
     catch(err){
-        throw new Error(err)
+        throw new Error('Connection Problem')
     }  
 }
 
@@ -22,7 +23,7 @@ export async function getAuthenticatedUser(){
         return data
     }
     catch(error){
-        throw new Error(error)
+        throw new Error('Connection Problem')
     }
  
 }
@@ -36,7 +37,7 @@ export async function getMyOrganizations(){
     return data
     }
     catch(error){
-        throw new Error(error)
+        throw new Error('Connection Problem')
     }   
 }
 
@@ -49,7 +50,7 @@ export default async function getAllOrganizations(area){
     return data
     }
     catch(error){
-        throw new Error(error)
+        throw new Error('Connection Problem')
     }  
     } 
 }

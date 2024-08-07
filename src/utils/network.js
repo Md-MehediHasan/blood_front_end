@@ -16,7 +16,7 @@ export async function GetRequest(url) {
         }
     }
 
-const request =  await fetch(url, {
+    const request = await fetch(url, {
         headers: headers
     }, { caches: 'no-cache' })
     return request
@@ -47,6 +47,9 @@ export async function makePostRequest(url, data, isFileUpload) {
     if(request.status==200||request.status==201){
         server_response= await request?.json()
 
+    }
+    else{
+        server_response='Invalid Request'
     }
     
     return (

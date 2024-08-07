@@ -19,9 +19,11 @@ export default function CommonContextProvider({ children, token, districts,authe
   const [scrollHeight, setScrollHeight] = useState(0)
   const [isAuthenticated, setIsAuthenticated] = useState(authenticatedUser?.name ? true : false)
   const [allDistrict, setAllDistrict] = useState(districts)
-  const [selectedDist, setSelectedDist] = useState(districts[0].district.toLowerCase())
-  const [redirectMsg, setRedirectMsg] = useState('')
+  const [submissionError,setSubmissionError]=useState('')
   
+  useEffect(()=>{
+      setSubmissionError('')
+  },[])
 
 
   return (
@@ -33,10 +35,8 @@ export default function CommonContextProvider({ children, token, districts,authe
             isAuthenticated,
             setIsAuthenticated,
             allDistrict,
-            setSelectedDist,
-            redirectMsg,
-            setRedirectMsg,
-            authenticatedUser
+            authenticatedUser,
+            submissionError,setSubmissionError
           }}>
 
            { children }

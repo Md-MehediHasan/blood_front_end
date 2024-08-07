@@ -13,7 +13,7 @@ export default function FormInputs({ formInputs,onChangeHandler }) {
                     { input.inputType == 'select' &&
                         <select name={ input.inputName } id={ input.inputName } value={ input.storeName } onChange={ onChangeHandler } className=" px-2 w-[65%] md:w-2/3 py-2  rounded-md outline-none  bg-gray-800 " required>
                             {input?.data?.map(item => (
-                                <option key={ item.id } value={ input.label == 'Blood Group' ?item?.id:  input.label =='Upazila'?    item : item[input.inputName]} className="block w-1/4">{input.label =='Upazila'? item: item[input.inputName] }</option>
+                                <option key={ item.id } value={ input.label == 'Blood Group' ?item?.id:  input.inputName =='upazila'?    item : item[input.inputName]} className="block w-1/4">{input.inputName =='upazila'? item: item[input.inputName] }</option>
                             ))}
                         </select>
                     }

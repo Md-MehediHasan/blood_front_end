@@ -117,7 +117,7 @@ export default function MainLayout({children}){
                     }
                 </div>
                 {/* Children from all routes */ }
-                <section className="h-screen lg:h-auto overflow-auto lg:overflow-hidden bg-gray-700">
+                <section className="h-screen lg:h-auto overflow-auto lg:overflow-hidden bg-gray-700 select-none">
                     { children }
                 </section>
             </section>

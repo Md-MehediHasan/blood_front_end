@@ -6,10 +6,10 @@ export default async function Register({searchParams}){
     let upazilaByDistrictName
     let selectedDistrict=searchParams['selectedDistrict']
     if(selectedDistrict){
-        upazilaByDistrictName = await getAllUpazilas(selectedDistrict)
+        upazilaByDistrictName= await getAllUpazilas(selectedDistrict)
       }
     return(
-        <SearchContextProvider upazilas={upazilaByDistrictName}>
+        <SearchContextProvider allUpazila={upazilaByDistrictName}>
             <main className='py-12 pb-48  lg:py-16'>
                 <section>
                     <RegistrationForm />

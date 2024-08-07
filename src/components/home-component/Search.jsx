@@ -5,6 +5,9 @@ import { useSearchContext } from '../../Contexts/SearchListContext'
 import { GetRequest } from "../../utils/network"
 import { endPoints } from '../../utils/endPoints'
 import { usePathname, useSearchParams,useRouter  } from "next/navigation"
+import { getDonarList } from "../../backendRequests/getRequests"
+import { useCommonContext } from "../../Contexts/CommonContexts"
+
 
 export const blood_choices = [
     {
@@ -42,47 +45,40 @@ export const blood_choices = [
 ]
 
 export default function Search({donarType}) {
-    const searchParams=useSearchParams()
-    const pathName=usePathname()
-    const {replace}=useRouter()
-    const params = new URLSearchParams(searchParams)
     const {
-        isSearched,
-        setIsSearched,
         blood_id,
         district,
         upazila,
-        onChangQueryData } = useSearchContext()
+        onChangQueryData,searchResult,setSearchResult,setIsSearching
+    } = useSearchContext()
+    const { submissionError,setSubmissionError}=useCommonContext()
 
-    async function searchBlood() {
-        setIsSearched(true)
-            params.set('blood_group', blood_id)
-            params.set('donar_type',donarType)
-            params.set('selectedDistrict','Dhaka')
-            if (district != '') {
-                params.set('selectedDistrict',district)
-            }
-            if (upazila != '') {
-                params.set('district', district)
-                params.set('upazila', upazila)
-            }
-            else {
-                params.delete('district')
-                params.delete('upazila')
-            }
-            return replace(`${pathName}?${params.toString()}`);
-    }
 
  
+    async function searchBlood(){
+        setIsSearching(true)
+        try{
+            let donars= await getDonarList(blood_id,district,upazila,donarType)
+            if(donars){
+            setSearchResult(donars)
+            setIsSearching(false)
+            }
+        }
+        catch(e){
+            setIsSearching(false)
+           setSubmissionError(e.message)
+        }
+       
+       
+  }
 
   useEffect(()=>{
-     searchBlood()
-  },[upazila,district])
+    if(district !=''){
+        searchBlood()
+    }
+    
+  },[upazila])
 
- 
-  
-
- 
 
     return (
         <div className="mx-auto space-y-2 text-xl select-none">

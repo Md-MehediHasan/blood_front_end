@@ -75,7 +75,7 @@ export default function RegistrationForm() {
             storeName: district,
         },
         {
-            label: 'Upazila',
+            label: 'Thana/Upazila',
             inputType: 'select',
             inputName: 'upazila',
             data: allUpazila,
@@ -156,11 +156,11 @@ export default function RegistrationForm() {
 
                 setTimeout(() => {
                     return window.location.href = '/login'
-                }, 3000)
+                }, 1200)
 
             }
-            else if (request.status !== 201) {
-                setRegiStatus({ ...regiStatus, isLoading: false, serverMsg: request.server_response })
+            else {
+                setRegiStatus({ ...regiStatus, isLoading: false, serverMsg: request?.server_response })
 
             }
         }
@@ -180,12 +180,13 @@ export default function RegistrationForm() {
         
     }, [district])
 
+ 
 
 
     return (
        
             <form className="block w-[90%] lg:w-1/2 mx-auto text-slate-100  bg-gray-700  p-4 lg:p-12 rounded-md shadow-md border border-gray-600 select-none" onSubmit={ saveData }>
-                <h1 className="w-full block text-center my-5 text-2xl">Blood Donator Registration</h1>
+                <h1 className="w-full block text-center my-5 text-2xl">Blood Donar Registration</h1>
                 <p className='text-green-600 text-center text-xl my-4'>{regiStatus.serverMsg}</p>
                 { regiStatus.isRegistrationSuccess && <p className='text-green-600 text-center text-xl my-4'>Redirecting...</p> }
                 <FormInputs formInputs={ formInputs } onChangeHandler={ onRegistrationDataChange } />
