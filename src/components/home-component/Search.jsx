@@ -68,9 +68,12 @@ export default function Search({donarType}) {
             setIsSearching(false)
            setSubmissionError(e.message)
         }
-       
-       
+         
   }
+
+  useEffect(()=>{
+    searchBlood()
+  },[])
 
   useEffect(()=>{
     if(district !=''){
